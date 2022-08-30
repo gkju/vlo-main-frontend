@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import {FunctionComponent} from "react";
 import {SmallCardProps} from "./SmallCardWrapper";
-import {motion} from "framer-motion";
+import {motion, MotionProps} from "framer-motion";
 import {Title} from "./MediumCardHorizontal";
 
-export const MediumCardVertical: FunctionComponent<SmallCardProps & {className?: string}> = (props) => {
+export const MediumCardVertical: FunctionComponent<SmallCardProps & {className?: string} & MotionProps> = (props) => {
     return <motion.div className="p-10" {...props}>
         <CardHorizontal imgSrc={props.imgSrc}>
             <Tag animate={{scale: 1}} whileHover={{scale: 0.95}}>{props.tag}</Tag>

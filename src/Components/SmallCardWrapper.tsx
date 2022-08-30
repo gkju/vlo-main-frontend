@@ -1,7 +1,7 @@
 import {motion} from "framer-motion";
 import {SmallCard} from "./SmallCard";
 import styled from "styled-components";
-import {FunctionComponent} from "react";
+import {FunctionComponent, HTMLAttributes} from "react";
 
 export interface SmallCardProps {
     tag: string;
@@ -9,12 +9,13 @@ export interface SmallCardProps {
     author: string;
     time: string;
     imgSrc: string;
+    Id: string;
 }
 
-export const SmallCardWrapper: FunctionComponent<SmallCardProps> = (props) => {
-    return <div className="p-5 xl:pb-10">
-        <SmallCard>
-            <motion.div animate={{scale: 1}} whileHover={{scale: 0.95}}>
+export const SmallCardWrapper: FunctionComponent<SmallCardProps & {className: string} & HTMLAttributes<HTMLDivElement>> = (props) => {
+    return <div {...props} className={`p-5 xl:pb-10 w-full h-full ${props.className}`}>
+        <SmallCard className="grid grid-rows-[1fr_50px] h-full md:grid-rows-[10fr_2fr]">
+            <motion.div className="p-3 h-full" animate={{scale: 1}} whileHover={{scale: 0.95}}>
                 <Tag animate={{scale: 1}} whileHover={{scale: 0.95}}>{props.tag}</Tag>
                 <SmallCardImg src={props.imgSrc} />
             </motion.div>
@@ -47,7 +48,9 @@ export const SmallCardFooter = styled.div`
 export const SmallCardTitle = styled.div`
     font-family: Lato, serif;
     padding: 10px 0 0 35px;
+    margin-top: 10px;
     font-size: 30px;
+    align-self: end;
 `;
 
 export const Tag = styled(motion.div)`
@@ -55,15 +58,18 @@ export const Tag = styled(motion.div)`
     position: absolute;
     padding: 5px 15px;
     left: auto;
-    right: 15px;
-    top: 15px;
+    right: 25px;
+    top: 25px;
     border-radius: 20px;
     font-family: Raleway, serif;
     font-weight: 500;
     z-index: 2;
 `
 
-export const SmallCardImg = styled.img`
+export const SmallCardImg = styled.div<{src: string}>`
     border-radius: 35px;
-    padding: 10px;
+    width: 100%;
+    height: 100%;
+    background: url(${props => props.src}) center;
+    background-size: cover;
 `;
