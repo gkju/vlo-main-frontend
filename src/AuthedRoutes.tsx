@@ -7,6 +7,7 @@ import {useWindowSize} from "react-use";
 import {About} from "./Pages/About/About";
 import { AnimatePresence } from "framer-motion";
 import Editor from "./Components/Editor/Editor";
+import {News} from "./Pages/News/News";
 
 export const AuthedRoutes: FunctionComponent = (props) => {
     const {width} = useWindowSize();
@@ -19,6 +20,7 @@ export const AuthedRoutes: FunctionComponent = (props) => {
             <Background style={{marginLeft: horizontal ? '' : '200px'}}>
                 <AnimatePresence mode="wait">
                     <Routes location={location} key={location.pathname}>
+                        <Route path="/news" element={<News />} />
                         <Route path="/edit" element={<Editor />} />
                         <Route path="/about" element={<About />} />
                         <Route path="*" element={<Home />} />
