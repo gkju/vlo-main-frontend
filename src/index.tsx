@@ -18,9 +18,23 @@ import {createTheme, ThemeProvider} from "@mui/material";
 import {plPL} from "@mui/material/locale";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 
-const theme = createTheme(
-    plPL
-);
+const theme = createTheme({
+    palette: {
+        mode: 'dark',
+        primary: {
+            main: '#6C5DD3',
+        },
+        secondary: {
+            main: '#f50057',
+        },
+        text: {
+            primary: 'rgba(255, 255, 255, 0.9)',
+        },
+        background: {
+            paper: '#252533',
+            default: '#1d1d28',
+    }
+}}, plPL);
 
 const queryClient = new QueryClient();
 

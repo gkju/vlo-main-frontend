@@ -43,9 +43,25 @@ export const News = () => {
         }
     };
 
-    return <motion.div initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}}>
-        <Toolbar className="px-20 pt-10 absolute">
-            Szukaj
+    return <motion.div className="relative" initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}}>
+        <Toolbar className="absolute z-10 w-full">
+            <div className="px-20 pt-10 grid grid-cols-5">
+                <div className="">
+                    Szukaj
+                </div>
+                <div className="">
+                    Autor
+                </div>
+                <div className="">
+                    Data
+                </div>
+                <div className="">
+                    Temat
+                </div>
+                <motion.button onPointerUp={() => navigate("/CreateArticle")} initial={{scale: 1}} whileHover={{scale: 1.1}} className="text-white bg-[#6D5DD3] rounded-xl p-2 -mt-2 w-full">
+                    Utwórz
+                </motion.button>
+            </div>
         </Toolbar>
         <div className="p-10 xl:pr-5 py-20 relative h-[100vh] grid grid-cols-2 xl:grid-cols-[5fr_5fr_7fr] grid-rows-2 justify-items-center items-center">
             <SmallCardWrapper

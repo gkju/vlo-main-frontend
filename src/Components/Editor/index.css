@@ -16,6 +16,7 @@
   --color7: #777;
   --border-color: #fff;
   --color-hover: #6D5DD3;
+  --color-divider: rgba(0,0,0,0);
   color: white;
 
 }
@@ -49,9 +50,13 @@ a {
 }
 
 code {
-  @apply p-2 rounded-lg;
-  transform: scale(0.1);
+  @apply p-2 m-2 rounded-lg;
   background: var(--contrast);
+  font-size: 80%;
+}
+
+.editor-text-code {
+  transform: scale(0.3);
 }
 
 h1 {
@@ -722,8 +727,6 @@ i.prettier-error {
   z-index: 10;
   display: block;
   position: fixed;
-  box-shadow: 0 12px 28px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.1),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.5);
   border-radius: 8px;
   min-height: 40px;
   background-color: var(--contrast);
@@ -1309,8 +1312,8 @@ button.action-button:disabled {
   margin-bottom: 1px;
   background: var(--contrast);
   padding: 4px;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
   vertical-align: middle;
   overflow: auto;
   height: 36px;
@@ -1415,7 +1418,7 @@ button.action-button:disabled {
 
 .toolbar .divider {
   width: 1px;
-  background-color: var(--color-hover);
+  background-color: var(--color-divider);
   margin: 0 4px;
 }
 

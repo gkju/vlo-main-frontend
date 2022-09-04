@@ -4,7 +4,7 @@ import { ContentEditable } from "@lexical/react/LexicalContentEditable";
 import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
 import { AutoFocusPlugin } from "@lexical/react/LexicalAutoFocusPlugin";
 import ToolbarPlugin from "./plugins/ToolbarPlugin";
-import { HeadingNode, QuoteNode } from "@lexical/rich-text";
+import {HeadingNode, InitialEditorStateType, QuoteNode} from "@lexical/rich-text";
 import { TableCellNode, TableNode, TableRowNode } from "@lexical/table";
 import { ListItemNode, ListNode } from "@lexical/list";
 import { CodeHighlightNode, CodeNode } from "@lexical/code";
@@ -30,12 +30,16 @@ import AutoEmbedPlugin from "./plugins/AutoEmbedPlugin";
 import {TablePlugin} from "@lexical/react/LexicalTablePlugin";
 import TableCellResizerPlugin from "./plugins/TableCellResizer";
 import TableActionMenuPlugin from "./plugins/TableActionMenuPlugin";
+import {OnChangePlugin} from "@lexical/react/LexicalOnChangePlugin";
+import {EditorState, LexicalEditor} from "lexical";
+import {HorizontalRuleNode} from "@lexical/react/LexicalHorizontalRuleNode";
+import HorizontalRulePlugin from "./plugins/HorizontalRulePlugin";
 
 function Placeholder() {
     return <div className="my-10 top-0 absolute pointer-events-none">Twój tekst...</div>;
 }
 
-const editorConfig = {
+export const editorConfig = {
     // The editor theme
     theme: Theme,
     // Handling of errors during update
@@ -60,23 +64,36 @@ const editorConfig = {
         FigmaNode,
         CodeHighlightNode,
         TableNode,
+        HorizontalRuleNode
     ],
     namespace: "editor",
+    readOnly: false
 };
 
-export default function Editor() {
+interface EditorProps {
+    onChange?: (editorState: EditorState, editor: LexicalEditor) => void,
+    initialEditorState?: InitialEditorStateType
+}
+
+export default function Editor(props: EditorProps) {
+    let editorState = props.initialEditorState;
+    if(typeof props.initialEditorState == 'string' && props.initialEditorState.length < 3) {
+        editorState = undefined;
+    }
+
     return (
-        <LexicalComposer initialConfig={editorConfig}>
-            <div>
+        <LexicalComposer initialConfig={{...editorConfig, editorState}}>
+            <div className="fixed w-full z-10">
                 <ToolbarPlugin />
             </div>
-            <div className="editor-container h-[100vh] grid grid-rows-[90fr_10fr]">
+            <div className="editor-container h-[100vh] pt-5 grid grid-rows-[90fr_10fr]">
                 <div className="editor-inner p-10 relative">
                     <RichTextPlugin
                         contentEditable={<ContentEditable className="editor-input" />}
                         placeholder={<Placeholder />}
                     />
                     <AutoFocusPlugin />
+                    <OnChangePlugin onChange={props?.onChange ?? (() => 1)} />
                     <CodeHighlightPlugin />
                     <HistoryPlugin />
                     <AutoFocusPlugin />
@@ -91,6 +108,7 @@ export default function Editor() {
                     <FigmaPlugin />
                     <AutoEmbedPlugin />
                     <TablePlugin />
+                    <HorizontalRulePlugin />
                     <TableCellResizerPlugin />
                     <TableActionMenuPlugin />
                 </div>

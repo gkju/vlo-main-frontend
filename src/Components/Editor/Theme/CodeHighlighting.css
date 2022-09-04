@@ -7,6 +7,12 @@
  *
  */
 
+.editor-code {
+    @apply w-full block relative mx-0
+}
+
+
+
 .PlaygroundEditorTheme__ltr {
     text-align: left;
 }

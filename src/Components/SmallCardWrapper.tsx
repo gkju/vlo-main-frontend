@@ -47,10 +47,11 @@ export const SmallCardFooter = styled.div`
 
 export const SmallCardTitle = styled.div`
     font-family: Lato, serif;
-    padding: 10px 0 0 35px;
-    margin-top: 10px;
+    padding: 0 0 0 35px;
+    margin-top: 5px;
     font-size: 30px;
     align-self: end;
+    text-align: left;
 `;
 
 export const Tag = styled(motion.div)`
