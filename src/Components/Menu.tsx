@@ -35,12 +35,12 @@ let Items: Array<Item> = [
     {
         route: '/about',
         displayName: 'O nas',
-        icon: <BsFillPeopleFill />,
+        icon: <AiFillContacts />,
     },
     {
         route: '/contact',
         displayName: 'Kontakt',
-        icon: <AiFillContacts />,
+        icon: <BsFillPeopleFill />,
     },
 ];
 

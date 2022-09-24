@@ -11,7 +11,8 @@ import {GetPrimary} from "../../ThemeProvider";
 import {isDevelopment} from "../../Config";
 
 interface props {
-    articleId: string
+    articleId: string,
+    borderRadius?: string
 }
 
 export const EditablePicture: FunctionComponent<props> = (props) => {
@@ -94,51 +95,62 @@ export const EditablePicture: FunctionComponent<props> = (props) => {
     }
 
     return (
-        <Wrapper onPointerUp={handleClick} onDragOver={e => {prevDP(e);}} onDrop={e => {prevDP(e); handleDrop(e)}}
+        <Wrapper {...props} onPointerUp={handleClick} onDragOver={e => {prevDP(e);}} onDrop={e => {prevDP(e); handleDrop(e)}}
                  onDragEnter={(e) => {setHover(true); prevDP(e);}} onDragLeave={(e) => {setHover(false); prevDP(e);}}>
-            <HideOverflow onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
-                <motion.div animate={{scale: hover ? 1.05 : 1}} transition={{duration: 0.35}}>
-                    <EditIcon animate={{opacity: hover ? 1 : 0, rotate: editRotation, color: editColor}} transition={{duration: 0.35}}>
+            <HideOverflow {...props} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
+                <motion.div animate={{scale: hover ? 1.05 : 1}} transition={{duration: 0.35}} className="relative h-full">
+                    <EditIcon {...props} animate={{opacity: hover ? 1 : 0, rotate: editRotation, color: editColor}} transition={{duration: 0.35}}>
                         <MuiIcon style={{fontSize: "60px"}} />
                     </EditIcon>
-                    <img src={!picture.error ? picture.data?.data ?? '' :  `https://avatars.dicebear.com/api/identicon/${props.articleId}.svg`} />
+                    <Image src={!picture.error ? picture.data?.data ?? '' :  `https://avatars.dicebear.com/api/identicon/${props.articleId}.svg`} />
                 </motion.div>
             </HideOverflow>
         </Wrapper>
     );
 }
 
-const Wrapper = styled(motion.div)`
+const Image = styled.div<{src: string}>`
+    background-image: url(${props => props.src});
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+    display: block;
+`
+
+const Wrapper = styled(motion.div)<props>`
     display: flex;
     position: relative;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    width: 200px;
-    border-radius: 10px;
+    height: 100%;
+    width: 100%;
+    border-radius: ${props => props?.borderRadius ? props.borderRadius : "10px"};
     user-select: none;
     z-index: 2;
 `;
 
-const EditIcon = styled(motion.div)`
+const EditIcon = styled(motion.div)<props>`
     display: flex;
     justify-content: center;
     align-items: center;
     position: absolute;
-    width: 200px;
-    height: 100%;
-    border-radius: 10px;
+    border-radius: ${props => props?.borderRadius ? props.borderRadius : "10px"};
     background-color: rgba(0,0,0,0.6);
     pointer-events: none;
     color: white;
+    width: 100%;
+    height: 100%;
     z-index: 1;
     opacity: 0;
 `;
 
-const HideOverflow = styled(motion.div)`
+const HideOverflow = styled(motion.div)<props>`
     overflow: hidden;
-    width: 200px;
-    border-radius: 10px;
+    height: 100%;
+    border-radius: ${props => props?.borderRadius ? props.borderRadius : "10px"};
+    width: 100%;
 `;
 
 const Button = styled(motion.div)`

@@ -2,28 +2,41 @@ import {motion} from "framer-motion";
 import {SmallCard} from "./SmallCard";
 import styled from "styled-components";
 import {FunctionComponent, HTMLAttributes} from "react";
+import {AccountsDataModelsDataModelsArticle} from "@gkju/vlo-boards-client-axios-ts";
+import {useArticlePicture} from "../Pages/CreateArticle/Queries";
+import {isDevelopment} from "../Config";
+import {useNavigate} from "react-router-dom";
 
 export interface SmallCardProps {
-    tag: string;
-    title: string;
-    author: string;
-    time: string;
-    imgSrc: string;
-    Id: string;
+    article?: AccountsDataModelsDataModelsArticle
 }
 
 export const SmallCardWrapper: FunctionComponent<SmallCardProps & {className: string} & HTMLAttributes<HTMLDivElement>> = (props) => {
-    return <div {...props} className={`p-5 xl:pb-10 w-full h-full ${props.className}`}>
+    const {article} = props;
+    const picture = useArticlePicture(article?.articleId ?? '');
+    const navigate = useNavigate();
+
+    if(!article || picture.isLoading) {
+        return <></>
+    }
+
+    // TODO: Better solution
+    if(isDevelopment && picture.data?.data) {
+        // @ts-ignore
+        picture.data.data = picture.data.data.replace("https://", "http://");
+    }
+
+    return <div {...props} onPointerUp={() => navigate(article?.articleId ?? '')} className={`p-5 xl:pb-10 w-full h-full ${props.className}`}>
         <SmallCard className="grid grid-rows-[1fr_50px] h-full md:grid-rows-[10fr_2fr]">
             <motion.div className="p-3 h-full" animate={{scale: 1}} whileHover={{scale: 0.95}}>
-                <Tag animate={{scale: 1}} whileHover={{scale: 0.95}}>{props.tag}</Tag>
-                <SmallCardImg src={props.imgSrc} />
+                <Tag animate={{scale: 1}} whileHover={{scale: 0.95}}>{article?.tags ? article?.tags[0]?.content ?? '' : ''}</Tag>
+                <SmallCardImg src={picture.data?.data ?? ''} />
             </motion.div>
-            <SmallCardTitle>{props.title}</SmallCardTitle>
+            <SmallCardTitle>{article.title}</SmallCardTitle>
             <SmallCardFooter>
-                {props.author}
+                {article.author?.userName}
                 <SmallCardTime className="text-right">
-                    {props.time}
+                    {new Date(article.modifiedOn ?? '').toLocaleDateString()}
                 </SmallCardTime>
 
             </SmallCardFooter>
@@ -47,7 +60,7 @@ export const SmallCardFooter = styled.div`
 
 export const SmallCardTitle = styled.div`
     font-family: Lato, serif;
-    padding: 0 0 0 35px;
+    padding: 0 35px 0 35px;
     margin-top: 5px;
     font-size: 30px;
     align-self: end;
@@ -65,6 +78,8 @@ export const Tag = styled(motion.div)`
     font-family: Raleway, serif;
     font-weight: 500;
     z-index: 2;
+    text-align: left;
+    max-width: 200px;
 `
 
 export const SmallCardImg = styled.div<{src: string}>`

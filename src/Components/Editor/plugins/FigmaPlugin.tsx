@@ -7,7 +7,7 @@
  */
 
 import {useLexicalComposerContext} from '@lexical/react/LexicalComposerContext';
-import {$insertBlockNode} from '@lexical/utils';
+import {$insertNodeToNearestRoot} from '@lexical/utils';
 import {COMMAND_PRIORITY_EDITOR, createCommand, LexicalCommand} from 'lexical';
 import {useEffect} from 'react';
 
@@ -16,23 +16,23 @@ import {$createFigmaNode, FigmaNode} from '../nodes/FigmaNode';
 export const INSERT_FIGMA_COMMAND: LexicalCommand<string> = createCommand();
 
 export default function FigmaPlugin(): JSX.Element | null {
-  const [editor] = useLexicalComposerContext();
+    const [editor] = useLexicalComposerContext();
 
-  useEffect(() => {
-    if (!editor.hasNodes([FigmaNode])) {
-      throw new Error('FigmaPlugin: FigmaNode not registered on editor');
-    }
+    useEffect(() => {
+        if (!editor.hasNodes([FigmaNode])) {
+            throw new Error('FigmaPlugin: FigmaNode not registered on editor');
+        }
 
-    return editor.registerCommand<string>(
-      INSERT_FIGMA_COMMAND,
-      (payload) => {
-        const figmaNode = $createFigmaNode(payload);
-        $insertBlockNode(figmaNode);
-        return true;
-      },
-      COMMAND_PRIORITY_EDITOR,
-    );
-  }, [editor]);
+        return editor.registerCommand<string>(
+            INSERT_FIGMA_COMMAND,
+            (payload) => {
+                const figmaNode = $createFigmaNode(payload);
+                $insertNodeToNearestRoot(figmaNode);
+                return true;
+            },
+            COMMAND_PRIORITY_EDITOR,
+        );
+    }, [editor]);
 
-  return null;
+    return null;
 }

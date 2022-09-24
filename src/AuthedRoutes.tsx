@@ -13,7 +13,8 @@ import {CreateArticle} from "./Pages/CreateArticle/CreateArticle";
 import {InitCreateArticle} from "./Pages/CreateArticle/InitCreateArticle";
 
 let HideMenuRoutes = [
-    "/CreateArticle"
+    "/CreateArticle",
+    "/articles/"
 ]
 
 export const AuthedRoutes: FunctionComponent = (props) => {
@@ -59,4 +60,5 @@ const Background = styled(motion.div)`
   background: rgba(33, 33, 43, 1);
   min-height: 100vh;
   height: 100%;
+  position: relative;
 `;

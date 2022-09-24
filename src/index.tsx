@@ -17,6 +17,9 @@ import {GoogleReCaptchaProvider} from "react-google-recaptcha-v3";
 import {createTheme, ThemeProvider} from "@mui/material";
 import {plPL} from "@mui/material/locale";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
+import {LocalizationProvider} from "@mui/x-date-pickers";
+import {AdapterMoment} from "@mui/x-date-pickers/AdapterMoment";
+import "moment/locale/pl";
 
 const theme = createTheme({
     palette: {
@@ -46,18 +49,20 @@ root.render(
             <Provider store={Store}>
                 <GoogleReCaptchaProvider reCaptchaKey={String(CaptchaConfig.CaptchaKey)}>
                     <ThemeProvider theme={theme}>
-                        <BrowserRouter>
-                            <Routes>
-                                <Route path="/LogoutRequest" element={<LogoutRequest />} />
-                                <Route path="/logout-callback" element={<LogoutCallback />} />
-                                <Route path="/login-callback" element={<LoginCallback />} />
-                            </Routes>
-                            {window === window.parent &&
-                                <OIDCLogon/>
-                            }
-                        </BrowserRouter>
-                        <ModalHandler />
-                        <MinimalistModalHandler />
+                        <LocalizationProvider dateAdapter={AdapterMoment} adapterLocale="plPL">
+                            <BrowserRouter>
+                                <Routes>
+                                    <Route path="/LogoutRequest" element={<LogoutRequest />} />
+                                    <Route path="/logout-callback" element={<LogoutCallback />} />
+                                    <Route path="/login-callback" element={<LoginCallback />} />
+                                </Routes>
+                                {window === window.parent &&
+                                    <OIDCLogon/>
+                                }
+                            </BrowserRouter>
+                            <ModalHandler />
+                            <MinimalistModalHandler />
+                        </LocalizationProvider>
                     </ThemeProvider>
                 </GoogleReCaptchaProvider>
             </Provider>

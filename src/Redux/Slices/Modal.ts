@@ -1,9 +1,10 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../Store/Store";
+import {ReactNode} from "react";
 
 export interface modal {
     title: string,
-    content: string,
+    content: string | ReactNode,
     handler?: () => void,
     cancelHandler?: () => void,
     buttonText?: string,

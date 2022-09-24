@@ -3,13 +3,30 @@ import {FunctionComponent} from "react";
 import {SmallCardProps} from "./SmallCardWrapper";
 import {motion, MotionProps} from "framer-motion";
 import {Title} from "./MediumCardHorizontal";
+import {useArticlePicture} from "../Pages/CreateArticle/Queries";
+import {isDevelopment} from "../Config";
+import {useNavigate} from "react-router-dom";
 
 export const MediumCardVertical: FunctionComponent<SmallCardProps & {className?: string} & MotionProps> = (props) => {
-    return <motion.div className="p-10" {...props}>
-        <CardHorizontal imgSrc={props.imgSrc}>
-            <Tag animate={{scale: 1}} whileHover={{scale: 0.95}}>{props.tag}</Tag>
+    const {article} = props;
+    const picture = useArticlePicture(article?.articleId ?? '');
+    const navigate = useNavigate();
+
+    if(!article || picture.isLoading) {
+        return <></>
+    }
+
+    // TODO: Better solution
+    if(isDevelopment && picture.data?.data) {
+        // @ts-ignore
+        picture.data.data = picture.data.data.replace("https://", "http://");
+    }
+
+    return <motion.div onPointerUp={() => navigate(article?.articleId ?? '')} className="p-10" {...props}>
+        <CardHorizontal imgSrc={picture.data?.data ?? ''}>
+            <Tag animate={{scale: 1}} whileHover={{scale: 0.95}}>{article?.tags ? article?.tags[0]?.content ?? '' : ''}</Tag>
             <Title>
-                {props.title}
+                {article.title}
             </Title>
         </CardHorizontal>
     </motion.div>

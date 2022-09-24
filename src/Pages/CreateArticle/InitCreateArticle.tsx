@@ -8,7 +8,9 @@ export const InitCreateArticle = () => {
 
     useMount(async () => {
         const id = await createArticle();
-        navigate(`/CreateArticle/${id}`);
+        navigate(`/CreateArticle/${id}`, {
+            replace: true
+        });
     });
 
     return (
