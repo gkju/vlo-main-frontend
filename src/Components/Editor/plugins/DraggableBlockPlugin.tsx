@@ -31,7 +31,6 @@ import { createPortal } from "react-dom";
 import { isHTMLElement } from "../utils/guard";
 import { Point } from "../utils/point";
 import { Rect } from "../utils/rect";
-import invariant from "./Invariant";
 import "./index.css";
 
 function getElementByKeyOrThrow(
@@ -41,10 +40,8 @@ function getElementByKeyOrThrow(
   const element = editor._keyToDOMMap.get(key);
 
   if (element === undefined) {
-    invariant(
-      false,
-      "Reconciliation: could not find DOM element for node key %s",
-      key
+    throw new Error(
+      "Reconciliation: could not find DOM element for node key %s"
     );
   }
 

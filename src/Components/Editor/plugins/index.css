@@ -20,14 +20,6 @@
   margin-top: 20px;
 }
 
-.ToolbarPlugin__dialogButtonsList button {
-  margin-bottom: 20px;
-}
-
-.TableCellResizer__resizer {
-  position: absolute;
-}
-
 .draggable-block-menu {
   border-radius: 4px;
   padding: 2px 1px;

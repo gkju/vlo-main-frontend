@@ -38,19 +38,51 @@ import HorizontalRulePlugin from "./plugins/HorizontalRulePlugin";
 import { useState } from "react";
 import { SharedHistoryContext } from "./context/SharedHistoryContext";
 import { SharedAutocompleteContext } from "./context/SharedAutocompleteContext";
-import { TableContext, TablePlugin } from "./plugins/TablePlugin";
+import {
+  TableContext,
+  TablePlugin as NewTablePlugin,
+} from "./plugins/TablePlugin";
 import CodeActionMenuPlugin from "./plugins/CodeActionMenuPlugin";
+import { TablePlugin } from "@lexical/react/LexicalTablePlugin";
 import { TableNode as NewTableNode } from "./nodes/TableNode";
 import { TableCellNode, TableRowNode, TableNode } from "@lexical/table";
 import DraggableBlockPlugin from "./plugins/DraggableBlockPlugin";
 
 function Placeholder() {
   return (
-    <div className="my-10 top-0 absolute pointer-events-none">
+    <div className="top-0 absolute ml-10 pointer-events-none">
       Twój tekst...
     </div>
   );
 }
+
+const Nodes = [
+  HeadingNode,
+  ListNode,
+  ListItemNode,
+  QuoteNode,
+  CodeNode,
+  CodeHighlightNode,
+  NewTableNode,
+  AutoLinkNode,
+  LinkNode,
+  YouTubeNode,
+  TweetNode,
+  FigmaNode,
+  CodeHighlightNode,
+  HorizontalRuleNode,
+];
+
+const TableNodes = [
+  HeadingNode,
+  ListNode,
+  ListItemNode,
+  QuoteNode,
+  CodeNode,
+  CodeHighlightNode,
+  AutoLinkNode,
+  LinkNode,
+];
 
 export const editorConfig = {
   // The editor theme
@@ -60,25 +92,7 @@ export const editorConfig = {
     throw error;
   },
   // Any custom nodes go here
-  nodes: [
-    HeadingNode,
-    ListNode,
-    ListItemNode,
-    QuoteNode,
-    CodeNode,
-    CodeHighlightNode,
-    NewTableNode,
-    TableNode,
-    TableCellNode,
-    TableRowNode,
-    AutoLinkNode,
-    LinkNode,
-    YouTubeNode,
-    TweetNode,
-    FigmaNode,
-    CodeHighlightNode,
-    HorizontalRuleNode,
-  ],
+  nodes: Nodes,
   namespace: "editor",
   readOnly: false,
 };
@@ -91,17 +105,6 @@ interface EditorProps {
   style?: any;
   innerClassName?: string;
 }
-
-const TableCellNodes = [
-  HeadingNode,
-  ListNode,
-  ListItemNode,
-  QuoteNode,
-  CodeNode,
-  CodeHighlightNode,
-  AutoLinkNode,
-  LinkNode,
-];
 
 export default function Editor(props: EditorProps) {
   let editorState = props.initialEditorState;
@@ -125,8 +128,8 @@ export default function Editor(props: EditorProps) {
   };
 
   const cellEditorConfig = {
-    namespace: "Playground",
-    nodes: [...TableCellNodes],
+    namespace: "editor-cell",
+    nodes: [...TableNodes],
     onError: (error: Error) => {
       throw error;
     },
@@ -134,7 +137,7 @@ export default function Editor(props: EditorProps) {
   };
 
   return (
-    <LexicalComposer initialConfig={config}>
+    <LexicalComposer initialConfig={{ ...config, editable: !config?.readOnly }}>
       {!config?.readOnly ? (
         <div className="fixed w-full z-10">
           <ToolbarPlugin />
@@ -154,7 +157,7 @@ export default function Editor(props: EditorProps) {
                 <RichTextPlugin
                   contentEditable={
                     <div className="editor" ref={onRef}>
-                      <ContentEditable className="editor-input p-10" />
+                      <ContentEditable className="editor-input px-10" />
                     </div>
                   }
                   placeholder={<Placeholder />}
@@ -172,7 +175,7 @@ export default function Editor(props: EditorProps) {
                 <TwitterPlugin />
                 <FigmaPlugin />
                 <AutoEmbedPlugin />
-                <TablePlugin cellEditorConfig={cellEditorConfig}>
+                <NewTablePlugin cellEditorConfig={cellEditorConfig}>
                   <AutoFocusPlugin />
                   <RichTextPlugin
                     contentEditable={
@@ -182,10 +185,10 @@ export default function Editor(props: EditorProps) {
                   />
                   <HistoryPlugin />
                   <LinkPlugin />
-                </TablePlugin>
+                </NewTablePlugin>
                 <HorizontalRulePlugin />
                 <TableCellResizerPlugin />
-                {floatingAnchorElem && (
+                {floatingAnchorElem && !config?.readOnly && (
                   <>
                     <DraggableBlockPlugin anchorElem={floatingAnchorElem} />
                     <CodeActionMenuPlugin anchorElem={floatingAnchorElem} />

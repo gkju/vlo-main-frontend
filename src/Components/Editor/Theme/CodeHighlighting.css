@@ -11,8 +11,6 @@
     @apply w-full block relative mx-0
 }
 
-
-
 .PlaygroundEditorTheme__ltr {
     text-align: left;
 }
@@ -259,6 +257,36 @@
     100% {
         opacity: 1;
     }
+}
+.PlaygroundEditorTheme__tableCellResizeRuler {
+    display: block;
+    position: absolute;
+    width: 1px;
+    background-color: rgb(60, 132, 244);
+    height: 100%;
+    top: 0;
+}
+.PlaygroundEditorTheme__tableCellActionButtonContainer {
+    display: block;
+    right: 5px;
+    top: 6px;
+    position: absolute;
+    z-index: 4;
+    width: 20px;
+    height: 20px;
+}
+.PlaygroundEditorTheme__tableCellActionButton {
+    background-color: #eee;
+    display: block;
+    border: 0;
+    border-radius: 20px;
+    width: 20px;
+    height: 20px;
+    color: #222;
+    cursor: pointer;
+}
+.PlaygroundEditorTheme__tableCellActionButton:hover {
+    background-color: #ddd;
 }
 .PlaygroundEditorTheme__tableCellResizeRuler {
     display: block;

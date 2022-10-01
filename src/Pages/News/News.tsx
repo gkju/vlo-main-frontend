@@ -31,7 +31,7 @@ export const News = () => {
 
     return <motion.div className="relative" initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}}>
         <Toolbar className="absolute z-10 w-full">
-            <div className="px-20 pt-10 grid grid-cols-5">
+            <div className="px-5 md:px-20 pt-10 grid grid-cols-5">
                 <input type="text" value={search} onChange={e => {setSearch(e.target.value); setDebouncedSearch(e.target.value)}} placeholder="Szukaj..." className="bg-transparent outline-none" />
                 <motion.button onPointerUp={() => navigate("/CreateArticle")} initial={{scale: 1}} whileHover={{scale: 1.1}} className="text-white bg-[#6D5DD3] col-start-5 col-span-2 rounded-xl p-2 -mt-2 w-full">
                     Utwórz
@@ -41,7 +41,12 @@ export const News = () => {
         <AnimatePresence mode="wait">
             {!articles.isRefetching && !articles.isLoading &&
                 <motion.div initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}}
-                    className="p-10 xl:pr-5 py-20 relative h-[100vh] grid grid-cols-2 xl:grid-cols-[5fr_5fr_7fr] grid-rows-2 justify-items-center items-center">
+                    className="
+                    px-5 md:px-10 xl:pr-5 py-20
+                    relative h-[100vh] grid grid-cols-2
+                    xl:grid-cols-[5fr_5fr_7fr] grid-rows-2
+                    justify-items-center items-center
+                    ">
                     <SmallCardWrapper
                         article={GetArticle(1)}
                         className="col-span-2 md:hidden lg:col-span-1 lg:block"
