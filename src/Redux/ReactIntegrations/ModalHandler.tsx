@@ -24,11 +24,11 @@ export const ModalHandler : FunctionComponent = (props) => {
     };
 
     return (
-        <>
+        <div className="z-20">
             <Modal open={modalData !== undefined} close={closeHandler}>
                 <ModalBody modal={modalData} closeHandler={closeHandler} successHandler={successHandler} />
             </Modal>
-        </>
+        </div>
     );
 };
 

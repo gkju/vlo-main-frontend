@@ -7,8 +7,8 @@ import {useThrottle} from "react-use";
 import _ from "lodash";
 import {FilesApi} from "@gkju/vlo-accounts-client-axios-ts";
 
-const api = new ArticleApi(OpenApiSettings, "", UNSAFE_TOKEN_instance);
-const tagsApi = new TagApi(OpenApiSettings, "", UNSAFE_TOKEN_instance);
+export const api = new ArticleApi(OpenApiSettings, "", UNSAFE_TOKEN_instance);
+export const tagsApi = new TagApi(OpenApiSettings, "", UNSAFE_TOKEN_instance);
 export const accountsApi = new FilesApi(AccountsOpenApiSettings, "", UNSAFE_TOKEN_instance);
 
 export const createArticle = async (): Promise<string> => {

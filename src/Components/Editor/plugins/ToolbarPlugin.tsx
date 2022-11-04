@@ -82,7 +82,7 @@ import {
   CODE_LANGUAGE_OPTIONS,
   Divider,
   dropDownActiveClass,
-  FontDropDown,
+  FontDropDown, InsertEquationDialog,
   InsertTableDialog,
 } from "./ToolbarEssentials";
 import { INSERT_FILE_COMMAND } from "./AddFilePlugin";
@@ -92,6 +92,7 @@ import { AiOutlineFileAdd } from "react-icons/ai";
 import { Box, Modal, Paper } from "@mui/material";
 import { AnimatePresence } from "framer-motion";
 import { INSERT_TABLE_COMMAND as INSERT_NEW_TABLE_COMMAND } from "./TablePlugin";
+import {file_api} from "../../../Pages/Me/Queries";
 
 const style = {
   position: "absolute" as "absolute",
@@ -131,18 +132,56 @@ export default function ToolbarPlugin(): JSX.Element {
   const [isRTL, setIsRTL] = useState(false);
   const [codeLanguage, setCodeLanguage] = useState<string>("");
   const [showFileModal, setShowFileModal] = useState(false);
+  const [fileId, setFileId] = useState<string>("");
 
   const handleFileDialog = () => {
     setShowFileModal(true);
   };
 
-  const handleFileModalClose = () => {
-    let fileId: string = "";
+  const handleFileModalClick = async () => {
 
-    /*activeEditor.dispatchCommand(
+    let opts = {
+      multiple: false
+    };
+    // @ts-ignore
+    if(window?.showOpenFilePicker) {
+      // @ts-ignore
+      let files: FileSystemFileHandle[] = await window.showOpenFilePicker(opts);
+      for(let file of files) {
+        upload(await file.getFile());
+      }
+    }
+  }
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    let files = e.dataTransfer.files;
+    for(let file of files) {
+      return upload(file);
+    }
+  }
+
+  const [isLocked, acquireLock] = useState(false);
+
+  const upload = async (file: File) => {
+    if(isLocked) return;
+    acquireLock(true);
+    console.log("droppity")
+    const res = await file_api.apiFileManagementFileUploadFilePost(true, file);
+    console.log(res);
+    const id = res.data;
+    finalizeFileModal(id);
+  }
+
+  const finalizeFileModal = (fileId: string) => {
+    activeEditor.dispatchCommand(
             INSERT_FILE_COMMAND,
             fileId,
-        );*/
+    );
+    handleFileModalClose();
+  }
+
+  const handleFileModalClose = () => {
+    acquireLock(false);
     setShowFileModal(false);
   };
 
@@ -555,6 +594,19 @@ export default function ToolbarPlugin(): JSX.Element {
               <i className="icon table" />
               <span className="text">Table</span>
             </DropDownItem>
+            <DropDownItem
+                onClick={() => {
+                  showModal('Insert Equation', (onClose) => (
+                      <InsertEquationDialog
+                          activeEditor={activeEditor}
+                          onClose={onClose}
+                      />
+                  ));
+                }}
+                className="item">
+              <i className="icon equation" />
+              <span className="text">Equation</span>
+            </DropDownItem>
             {EmbedConfigs.map((embedConfig) => (
               <DropDownItem
                 key={embedConfig.type}
@@ -641,8 +693,17 @@ export default function ToolbarPlugin(): JSX.Element {
       <Divider />
 
       {modal}
-      <Modal open={showFileModal} onClose={handleFileModalClose}>
-        <Box sx={style}>test</Box>
+      <Modal
+          open={showFileModal}
+          onClose={handleFileModalClose}
+          onDragOver={e => e.preventDefault()} onDrop={e => {e.preventDefault(); handleDrop(e)}}
+          onDragEnter={(e) => {e.preventDefault()}} onDragLeave={(e) => {e.preventDefault();}}
+      >
+        <div onClick={handleFileModalClick} className={`${isLocked && "opacity-30"}`}>
+          <Box sx={style}>
+            Upuść plik lub kliknij, aby wybrać plik
+          </Box>
+        </div>
       </Modal>
     </div>
   );

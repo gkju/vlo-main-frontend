@@ -21,6 +21,12 @@ import {
     SerializedDecoratorBlockNode,
 } from '@lexical/react/LexicalDecoratorBlockNode';
 import * as React from 'react';
+import {useFile, useFileDetails} from "../../../Pages/Me/Queries";
+import { VLoader } from '@gkju/vlo-ui';
+import {FunctionComponent} from "react";
+import {file_t} from "../../../Pages/Me/Me";
+import {isDevelopment} from "../../../Config";
+import {AiOutlineDownload} from "react-icons/ai";
 
 type FileComponentProps = Readonly<{
     className: Readonly<{
@@ -38,13 +44,44 @@ function FileComponent({
                               nodeKey,
                               fileID,
                           }: FileComponentProps) {
+
+    const fileDetails = useFileDetails(fileID ?? '');
+    const details = fileDetails.data?.data;
+
+    if (fileDetails.isLoading) {
+        return <><VLoader /></>;
+    }
+
     return (
         <BlockWithAlignableContents
             className={className}
             format={format}
             nodeKey={nodeKey}>
-           <div>{fileID}</div>
+            <FileRenderer file={details} />
         </BlockWithAlignableContents>
+    );
+}
+
+const FileRenderer: FunctionComponent<{file?: file_t}> = (props) => {
+    const {file} = props;
+    const {data, isLoading, error} = useFile(file?.objectId ?? '');
+    let url: string = data?.data ?? '';
+
+    if(isDevelopment) {
+        url = url.replace("https://", "http://");
+    }
+
+    if(file?.contentType?.startsWith("image")) {
+        return <img src={url} />
+    }
+
+    return (
+        <div className="p-4 bg-[#171720] rounded-xl flex items-center">
+            {file?.fileName}
+            <a download href={url} onClick={() => window.open(url)} className="ml-auto mr-0">
+                <AiOutlineDownload />
+            </a>
+        </div>
     );
 }
 

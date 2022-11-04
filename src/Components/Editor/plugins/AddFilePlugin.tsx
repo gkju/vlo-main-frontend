@@ -2,7 +2,6 @@ import {useLexicalComposerContext} from '@lexical/react/LexicalComposerContext';
 import {$insertNodes, COMMAND_PRIORITY_EDITOR, createCommand, LexicalCommand} from 'lexical';
 import {useEffect} from 'react';
 
-import {$createYouTubeNode, YouTubeNode} from '../nodes/YouTubeNode';
 import {$createFileNode, FileNode} from "../nodes/FileNode";
 import {$insertNodeToNearestRoot} from "@lexical/utils";
 

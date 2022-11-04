@@ -47,6 +47,10 @@ import { TablePlugin } from "@lexical/react/LexicalTablePlugin";
 import { TableNode as NewTableNode } from "./nodes/TableNode";
 import { TableCellNode, TableRowNode, TableNode } from "@lexical/table";
 import DraggableBlockPlugin from "./plugins/DraggableBlockPlugin";
+import {EquationNode} from "./nodes/EquationNode";
+import EquationsPlugin from "./plugins/EquationsPlugin";
+import {FileNode} from "./nodes/FileNode";
+import AddFilePlugin from "./plugins/AddFilePlugin";
 
 function Placeholder() {
   return (
@@ -71,6 +75,8 @@ const Nodes = [
   FigmaNode,
   CodeHighlightNode,
   HorizontalRuleNode,
+  EquationNode,
+  FileNode
 ];
 
 const TableNodes = [
@@ -175,6 +181,7 @@ export default function Editor(props: EditorProps) {
                 <TwitterPlugin />
                 <FigmaPlugin />
                 <AutoEmbedPlugin />
+                <AddFilePlugin />
                 <NewTablePlugin cellEditorConfig={cellEditorConfig}>
                   <AutoFocusPlugin />
                   <RichTextPlugin
@@ -195,6 +202,7 @@ export default function Editor(props: EditorProps) {
                     <TableActionMenuPlugin anchorElem={floatingAnchorElem} />
                   </>
                 )}
+                <EquationsPlugin />
               </div>
             </div>
           </SharedAutocompleteContext>

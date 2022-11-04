@@ -58,6 +58,7 @@ export const AuthedRoutes: FunctionComponent = (props) => {
             <Route path="/edit" element={<Editor />} />
             <Route path="/about" element={<About />} />
             <Route path="/me" element={<Me />} />
+            <Route path="/me/:id" element={<Me />} />
             <Route path="*" element={<Home />} />
           </Routes>
         </AnimatePresence>

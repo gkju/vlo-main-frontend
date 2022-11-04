@@ -25,7 +25,7 @@ input {
   background: var(--contrast);
 }
 
-a {
+.editor > a {
   color: var(--color0);
   background: var(--color-hover);
   border-radius: 10px;

@@ -26,6 +26,8 @@ import * as React from "react";
 import Button from "../ui/Button";
 import TextInput from "../ui/TextInput";
 import { INSERT_TABLE_COMMAND as INSERT_NEW_TABLE_COMMAND } from "./TablePlugin";
+import {INSERT_EQUATION_COMMAND} from "./EquationsPlugin";
+import KatexEquationAlterer from "../ui/KatexEquationAlterer";
 
 export const blockTypeToBlockName = {
   bullet: "Bulleted List",
@@ -296,6 +298,24 @@ export function FontDropDown({
       )}
     </DropDown>
   );
+}
+
+export function InsertEquationDialog({
+                                       activeEditor,
+                                       onClose,
+                                     }: {
+  activeEditor: LexicalEditor;
+  onClose: () => void;
+}): JSX.Element {
+  const onEquationConfirm = useCallback(
+      (equation: string, inline: boolean) => {
+        activeEditor.dispatchCommand(INSERT_EQUATION_COMMAND, {equation, inline});
+        onClose();
+      },
+      [activeEditor, onClose],
+  );
+
+  return <KatexEquationAlterer onConfirm={onEquationConfirm} />;
 }
 
 export function InsertTableDialog({
