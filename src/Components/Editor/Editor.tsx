@@ -110,6 +110,8 @@ interface EditorProps {
   className?: string;
   style?: any;
   innerClassName?: string;
+  forceHeight?: boolean;
+  contentEditableClassName?: string;
 }
 
 export default function Editor(props: EditorProps) {
@@ -156,14 +158,14 @@ export default function Editor(props: EditorProps) {
         <TableContext>
           <SharedAutocompleteContext>
             <div
-              className={`editor-container h-[100vh] pt-5 ${props?.className}`}
+              className={`editor-container ${props?.forceHeight != false && "h-[100vh]"} pt-5 ${props?.className}`}
               style={props?.style}
             >
               <div className={`editor-inner relative ${props?.innerClassName}`}>
                 <RichTextPlugin
                   contentEditable={
                     <div className="editor" ref={onRef}>
-                      <ContentEditable className="editor-input px-10" />
+                      <ContentEditable className={`editor-input px-10 ${props?.contentEditableClassName}`} />
                     </div>
                   }
                   placeholder={<Placeholder />}

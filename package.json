@@ -5,7 +5,7 @@
   "private": true,
   "dependencies": {
     "@gkju/vlo-accounts-client-axios-ts": "2.0.2",
-    "@gkju/vlo-boards-client-axios-ts": "^1.9.0",
+    "@gkju/vlo-boards-client-axios-ts": "^1.9.1",
     "@gkju/vlo-ui": "^1.7.1",
     "@lexical/clipboard": "^0.5.0",
     "@lexical/code": "^0.5.0",

@@ -5,7 +5,7 @@ overrides:
 
 specifiers:
   '@gkju/vlo-accounts-client-axios-ts': 2.0.2
-  '@gkju/vlo-boards-client-axios-ts': ^1.9.0
+  '@gkju/vlo-boards-client-axios-ts': ^1.9.1
   '@gkju/vlo-ui': ^1.7.1
   '@lexical/clipboard': ^0.5.0
   '@lexical/code': ^0.5.0
@@ -71,7 +71,7 @@ specifiers:
 
 dependencies:
   '@gkju/vlo-accounts-client-axios-ts': 2.0.2
-  '@gkju/vlo-boards-client-axios-ts': 1.9.0
+  '@gkju/vlo-boards-client-axios-ts': 1.9.1
   '@gkju/vlo-ui': 1.7.1_4sjx6snpihs2ym5vkzoc4r67ty
   '@lexical/clipboard': 0.5.0_lexical@0.5.0
   '@lexical/code': 0.5.0_lexical@0.5.0
@@ -1812,8 +1812,8 @@ packages:
       - debug
     dev: false
 
-  /@gkju/vlo-boards-client-axios-ts/1.9.0:
-    resolution: {integrity: sha512-4g8q3C+2XckaNAt56id2EZTWypILRD3u9T0sYQ6Hqm7kqStw5XriR1qSvGSF/FpZytR1OfyoaWlejbcdwL0asw==, tarball: download/@gkju/vlo-boards-client-axios-ts/1.9.0/d572d25a8512c0971dff2b3b8e9355f0f1c44ea9}
+  /@gkju/vlo-boards-client-axios-ts/1.9.1:
+    resolution: {integrity: sha512-N0WP3MkLc26FRtOYHbYfnkniZbav9jF3JjvmD12bO+S39PW4FKlJYS299qxlM+k4pa//fbv7oFI7a4+gRZ3VbA==, tarball: download/@gkju/vlo-boards-client-axios-ts/1.9.1/e922febde49a29533ce126da3dfe5e6335330dc4}
     dependencies:
       axios: 0.27.2
       typescript: 5.0.0-dev.20221103
