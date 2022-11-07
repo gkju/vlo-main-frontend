@@ -14,7 +14,7 @@ export const Home: FunctionComponent = () => {
                         Aktualności
                     </div>
                     <div className="row-start-3 font-normal w-[80%] pb-10">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                       Nowe fajne aktualne
                     </div>
                 </IntroText>
             </Intro>

@@ -18,6 +18,8 @@ import { Article } from "./Pages/Article/Article";
 import { CreateArticle } from "./Pages/CreateArticle/CreateArticle";
 import { InitCreateArticle } from "./Pages/CreateArticle/InitCreateArticle";
 import { Me } from "./Pages/Me/Me";
+import {LogoutRequest} from "./Auth/LogoutRequest";
+import {Contact} from "./Pages/Contact/Contact";
 
 let HideMenuRoutes = ["/CreateArticle", "/articles/"];
 
@@ -59,6 +61,8 @@ export const AuthedRoutes: FunctionComponent = (props) => {
             <Route path="/about" element={<About />} />
             <Route path="/me" element={<Me />} />
             <Route path="/me/:id" element={<Me />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/logout" element={<LogoutRequest />} />
             <Route path="*" element={<Home />} />
           </Routes>
         </AnimatePresence>

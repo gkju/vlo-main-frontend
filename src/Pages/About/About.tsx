@@ -16,9 +16,9 @@ export const About: FunctionComponent = () => {
         </motion.div>
         <motion.div {...transition} className="p-10 h-full w-full col-span-full row-start-2 row-end-4">
             <Tile className="grid text-center grid-rows-6 grid-cols-1">
-                <p className="text-[50px] m-5">AAAA</p>
+                <p className="text-[50px] m-5">shalom</p>
                 <p className="row-start-2 row-end-5">
-                    AAAAAAAA
+                    dzien dobry
                 </p>
             </Tile>
         </motion.div>

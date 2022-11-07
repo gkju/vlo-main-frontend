@@ -5,8 +5,8 @@
   "private": true,
   "dependencies": {
     "@gkju/vlo-accounts-client-axios-ts": "2.0.2",
-    "@gkju/vlo-boards-client-axios-ts": "^1.9.1",
-    "@gkju/vlo-ui": "^1.7.1",
+    "@gkju/vlo-boards-client-axios-ts": "^1.10.0",
+    "@gkju/vlo-ui": "^1.7.5",
     "@lexical/clipboard": "^0.5.0",
     "@lexical/code": "^0.5.0",
     "@lexical/html": "^0.5.0",
@@ -68,7 +68,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && rm -rf ../vlo-main/wwwroot/* && mv build/* ../vlo-main/wwwroot/",
     "test": "react-scripts test"
   },
   "eslintConfig": {

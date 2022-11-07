@@ -20,3 +20,27 @@ export const useAddComment = (id: string) => {
         await queryClient.invalidateQueries([article, id]);
     }
 }
+
+export const useAddReactionToComment = (articleId: string, commentId: string) => {
+    const queryClient = useQueryClient();
+    return async (reaction: AccountsDataModelsDataModelsReactionType) => {
+        await api.apiArticlesArticleAddReactionToCommentPost(reaction, articleId, commentId);
+        await queryClient.invalidateQueries([article, articleId]);
+    }
+}
+
+export const useAddReply = (articleId: string, commentId: string) => {
+    const queryClient = useQueryClient();
+    return async (comment: string) => {
+        await api.apiArticlesArticleAddReplyArticlePost(comment, commentId, articleId);
+        await queryClient.invalidateQueries([article, articleId]);
+    }
+}
+
+export const useDeleteComment = (articleId: string, commentId: string) => {
+    const queryClient = useQueryClient();
+    return async () => {
+        await api.apiArticlesArticleDeleteArticleCommentDelete(commentId, articleId);
+        await queryClient.invalidateQueries([article, articleId]);
+    }
+}

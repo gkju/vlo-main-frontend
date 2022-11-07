@@ -13,6 +13,7 @@ import saul from "./saul.webp";
 import kerfus from "./kerfus.webp";
 import {AccountsDataModelsDataModelsArticle} from "@gkju/vlo-boards-client-axios-ts";
 import {Button} from "@mui/material";
+import {CommentRenderer} from "./CommentRenderer";
 
 var formatter = new Intl.DateTimeFormat("pl", {
   day: "numeric",
@@ -20,7 +21,7 @@ var formatter = new Intl.DateTimeFormat("pl", {
   year: "numeric",
 });
 
-enum ReactionType
+export enum ReactionType
 {
   Like,
   Dislike,
@@ -81,10 +82,10 @@ export const Article = () => {
       <Background src={picture.data?.data ?? ""}>
         <Title>{article.title}</Title>
       </Background>
-      <div className="flex justify-items-center items-center justify-center">
+      <div className="flex flex-col justify-items-center items-center justify-center">
         <div className="max-w-[800px] w-full grid grid-cols-[1fr_10fr_1fr]">
           <div className="col-start-2 row-start-1 py-2 px-2">
-            <Intro className="">
+            <Intro className="text-xs md:text-lg">
               {article?.author?.userName},{" "}
               {formatter.format(new Date(article.modifiedOn ?? ""))}
               <span className="ml-auto right-0">
@@ -103,7 +104,7 @@ export const Article = () => {
                 forceHeight={false}
             />
           </div>
-          <div className="w-full col-start-1 row-start-1 pt-7">
+          <div className="w-full row-start-2 flex justify-center md:px-0 col-start-1 col-end-4 md:block md:col-start-1 md:col-end-2 md:row-start-1 pt-7">
             <ReactionWrapper title="Like" onClick={() => addReaction(ReactionType.Like)}>
               <AiFillLike />
               <ReactionCountWrapper>
@@ -129,16 +130,27 @@ export const Article = () => {
               </ReactionCountWrapper>
             </ReactionWrapper>
           </div>
-          <Comments className="w-full pt-10 col-span-full">
-            <div className="px-10 grid mx-auto w-full max-w-[700px] relative">
-              <NeumorphTextArea className="" value={commentText} onChange={e => {setCommentText(e.target.value); setTouched(true); e.target.style.setProperty("--lines", String(e.target.value.split(/\r\n|\r|\n/).length))}} placeholder="Dodaj komentarz" hasValue={commentText.length > 0} />
-              {touched && <div className="mt-5 mx-5">
-                <Button className="" variant="outlined" onClick={() => {setTouched(false); setCommentText("");}}>Anuluj</Button>
-                <Button className="float-right" variant="contained" onClick={addCommentHandler}>Dodaj</Button>
-              </div>}
-            </div>
-          </Comments>
         </div>
+        <Comments className="w-full col-span-full bg-[#1A1A23]">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+            <path fill="#21212B" fill-opacity="1" d="M0,160L48,181.3C96,203,192,245,288,245.3C384,245,480,203,576,154.7C672,107,768,53,864,74.7C960,96,1056,192,1152,229.3C1248,267,1344,245,1392,234.7L1440,224L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
+          </svg>
+          <div className="px-10 grid mx-auto pb-10 w-full max-w-[700px] relative">
+            <NeumorphTextArea className="" value={commentText} onChange={e => {setCommentText(e.target.value); setTouched(true); e.target.style.setProperty("--lines", String(e.target.value.split(/\r\n|\r|\n/).length))}} placeholder="Dodaj komentarz" hasValue={commentText.length > 0} />
+            {touched && <div className="mt-5 mx-5">
+              <Button className="" variant="outlined" onClick={() => {setTouched(false); setCommentText("");}}>Anuluj</Button>
+              <Button className="float-right" variant="contained" onClick={addCommentHandler}>Dodaj</Button>
+            </div>}
+          </div>
+          <div className="px-10">
+            {article.comments?.filter(c => c.inReplyTo == undefined)?.map((comment) => (
+                <CommentRenderer articleId={article.articleId ?? ""} comments={article.comments ?? []} comment={comment} key={comment.id} />
+            ))}
+          </div>
+          <div className="h-[100px]">
+
+          </div>
+        </Comments>
       </div>
     </>
   );
@@ -152,7 +164,7 @@ const getReactionCount = (article: AccountsDataModelsDataModelsArticle, reaction
     return Array.from(article.reactions ?? [])?.filter(x => x.reactionType === reactionType).length;
 }
 
-const ReactionCountWrapper: FunctionComponent<PropsWithChildren<any>> = ({children, ...props}) => {
+export const ReactionCountWrapper: FunctionComponent<PropsWithChildren<any>> = ({children, ...props}) => {
   return (
       <div className="w-full h-5 flex justify-center mx-auto center-align items-center rounded-full text-sm">
         {children}
@@ -160,7 +172,8 @@ const ReactionCountWrapper: FunctionComponent<PropsWithChildren<any>> = ({childr
   );
 }
 
-const NeumorphTextArea = styled.textarea<{hasValue: Boolean, error?: Boolean}>`
+export const NeumorphTextArea = styled.textarea<{hasValue: Boolean, error?: Boolean}>`
+  --lines: 1;
   font-family: Raleway, serif;
   font-style: normal;
   font-weight: bold;
@@ -184,9 +197,9 @@ const NeumorphTextArea = styled.textarea<{hasValue: Boolean, error?: Boolean}>`
   }
 `;
 
-const ReactionWrapper: FunctionComponent<PropsWithChildren<any>> = ({children, ...props}) => {
+export const ReactionWrapper: FunctionComponent<PropsWithChildren<any>> = ({children, ...props}) => {
     return (
-        <motion.div {...props} whileHover={{scale: 1.2, rotateZ: 10}} whileTap={{scale: 0.9, rotateZ: -10}} className="relative py-2 grid grid-rows-2 justify-center center-align items-center">
+        <motion.div {...props} whileHover={{scale: 1.2, y: -10}} whileTap={{scale: 0.9, y: 0}} className="relative px-5 md:px-0 py-2 grid grid-rows-2 justify-center center-align items-center cursor-pointer">
             {children}
         </motion.div>
     );

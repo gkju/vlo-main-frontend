@@ -5,8 +5,8 @@ overrides:
 
 specifiers:
   '@gkju/vlo-accounts-client-axios-ts': 2.0.2
-  '@gkju/vlo-boards-client-axios-ts': ^1.9.1
-  '@gkju/vlo-ui': ^1.7.1
+  '@gkju/vlo-boards-client-axios-ts': ^1.10.0
+  '@gkju/vlo-ui': ^1.7.5
   '@lexical/clipboard': ^0.5.0
   '@lexical/code': ^0.5.0
   '@lexical/html': ^0.5.0
@@ -71,8 +71,8 @@ specifiers:
 
 dependencies:
   '@gkju/vlo-accounts-client-axios-ts': 2.0.2
-  '@gkju/vlo-boards-client-axios-ts': 1.9.1
-  '@gkju/vlo-ui': 1.7.1_4sjx6snpihs2ym5vkzoc4r67ty
+  '@gkju/vlo-boards-client-axios-ts': 1.10.0
+  '@gkju/vlo-ui': 1.7.5_4sjx6snpihs2ym5vkzoc4r67ty
   '@lexical/clipboard': 0.5.0_lexical@0.5.0
   '@lexical/code': 0.5.0_lexical@0.5.0
   '@lexical/html': 0.5.0_lexical@0.5.0
@@ -1812,8 +1812,8 @@ packages:
       - debug
     dev: false
 
-  /@gkju/vlo-boards-client-axios-ts/1.9.1:
-    resolution: {integrity: sha512-N0WP3MkLc26FRtOYHbYfnkniZbav9jF3JjvmD12bO+S39PW4FKlJYS299qxlM+k4pa//fbv7oFI7a4+gRZ3VbA==, tarball: download/@gkju/vlo-boards-client-axios-ts/1.9.1/e922febde49a29533ce126da3dfe5e6335330dc4}
+  /@gkju/vlo-boards-client-axios-ts/1.10.0:
+    resolution: {integrity: sha512-EWf4wMgLzAq5Z8pDPbLJqbiSWt6WcCakR1LQ7aY2+kesrJHWzEPfAEzrpG6HZOJMPKUE8aVUvnlgch9qb6MAgA==, tarball: download/@gkju/vlo-boards-client-axios-ts/1.10.0/6f469932806cd4f70018b9c57380606569dae95c}
     dependencies:
       axios: 0.27.2
       typescript: 5.0.0-dev.20221103
@@ -1821,8 +1821,8 @@ packages:
       - debug
     dev: false
 
-  /@gkju/vlo-ui/1.7.1_4sjx6snpihs2ym5vkzoc4r67ty:
-    resolution: {integrity: sha512-vQlBJZiSfQeUKkgQalMDO173FeSHmoQpNrq/Sav64EvokrX3VlmApCmGXG4Kc9JZ3Ly13hImhw4uNboDgXmLLQ==, tarball: download/@gkju/vlo-ui/1.7.1/3206378f7d29b94a39bad9d0f4c2c1c2dc3357a3}
+  /@gkju/vlo-ui/1.7.5_4sjx6snpihs2ym5vkzoc4r67ty:
+    resolution: {integrity: sha512-YoDfmTQy/F6+Ow+Tv40r1W3zVDZ9LZkbVrI/jW0lzJym5RyH/Pv9zqeA7PcVMmJGOmIsztDsnT15lWjDmnBB7w==, tarball: download/@gkju/vlo-ui/1.7.5/bee4738e02f4d97d61fb1bf0f336519fe5c173b1}
     peerDependencies:
       '@mui/styled-engine': npm:@mui/styled-engine-sc@latest
       '@types/react': ^18.0.15

@@ -16,12 +16,13 @@ export const isDevelopment = process.env.NODE_ENV === "development";
 export const frontendOrigin = isDevelopment ? "http://localhost:3001" : "https://suvlo.pl";
 export const authOrigin = isDevelopment ? "https://localhost:5001" : "https://accounts.suvlo.pl";
 export const apiOrigin = isDevelopment ? "https://localhost:7232" : "https://suvlo.pl";
+export const clientId = isDevelopment ? "VLO_MAIN_DEV" : "VLO_MAIN";
 
 export const apiLocation = "/api";
 
 export const authoritySettings: UserManagerSettings = {
   authority: authOrigin + "/",
-  client_id: "VLO_MAIN_DEV",
+  client_id: clientId,
   redirect_uri: frontendOrigin + "/login-callback",
   silent_redirect_uri: frontendOrigin + "/login-callback",
   response_type: "code",

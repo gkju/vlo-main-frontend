@@ -35,7 +35,7 @@ export const useSetPicture = () => {
 export const useArticlePicture = (Id: string) => {
     return useQuery([article, Id, picture], () => {
         return api.apiArticlesArticleGetPictureGet(Id);
-    }, {retry: false});
+    }, {staleTime: 240 * 1000, retry: false});
 }
 
 export const useSetTitle = (id: string) => {
