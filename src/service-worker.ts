@@ -41,6 +41,14 @@ registerRoute(
       return false;
     }
 
+    const routes = ["/api", "/connect", "/authorize", "/par", "/device", "/token", "/introspect", "/revoke", "/logout", "/keys", "/userinfo", "/."];
+
+    for(let route of routes) {
+        if(url.pathname.startsWith(route)) {
+            return false;
+        }
+    }
+
     if (url.pathname.startsWith('/api')) {
       return false;
     }
