@@ -7,7 +7,7 @@ import Editor from "../../Components/Editor/Editor";
 import authService from "../../Auth/AuthService";
 import {useAddComment, useAddReaction} from "./Queries";
 import {AiFillDislike, AiFillHeart, AiFillLike} from "react-icons/ai";
-import {FunctionComponent, PropsWithChildren, useState} from "react";
+import {FunctionComponent, PropsWithChildren, useEffect, useState} from "react";
 import { motion } from "framer-motion";
 import saul from "./saul.webp";
 import kerfus from "./kerfus.webp";
@@ -62,6 +62,15 @@ export const Article = () => {
   const [commentText, setCommentText] = useState("");
   const [touched, setTouched] = useState(false);
   const addComment = useAddComment(id ?? "");
+
+  useEffect(() => {
+    try {
+      // @ts-ignore
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    } catch (e) {
+
+    }
+  });
 
   const addCommentHandler = () => {
     if (commentText.length > 0) {
@@ -131,6 +140,12 @@ export const Article = () => {
             </ReactionWrapper>
           </div>
         </div>
+        <ins className="adsbygoogle w-full h-60"
+             style={{display: "block"}}
+             data-ad-layout="in-article"
+             data-ad-format="fluid"
+             data-ad-client="ca-pub-3366108701161830"
+             data-ad-slot="2999214848" />
         <Comments className="w-full col-span-full bg-[#1A1A23]">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
             <path fill="#21212B" fill-opacity="1" d="M0,160L48,181.3C96,203,192,245,288,245.3C384,245,480,203,576,154.7C672,107,768,53,864,74.7C960,96,1056,192,1152,229.3C1248,267,1344,245,1392,234.7L1440,224L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
@@ -224,7 +239,7 @@ const Background = styled.div<{ src: string }>`
 `;
 
 const Title = styled.div`
-  font-family: Lato, serif;
+  font-family: Lato, sans-serif;
   font-size: 60px;
   backdrop-filter: brightness(0.8) blur(3px);
   font-weight: 500;

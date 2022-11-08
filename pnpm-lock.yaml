@@ -66,6 +66,18 @@ specifiers:
   tailwindcss: ^3.1.8
   typescript: ^4.8.2
   web-vitals: ^2.1.4
+  workbox-background-sync: ^6.5.4
+  workbox-broadcast-update: ^6.5.4
+  workbox-cacheable-response: ^6.5.4
+  workbox-core: ^6.5.4
+  workbox-expiration: ^6.5.4
+  workbox-google-analytics: ^6.5.4
+  workbox-navigation-preload: ^6.5.4
+  workbox-precaching: ^6.5.4
+  workbox-range-requests: ^6.5.4
+  workbox-routing: ^6.5.4
+  workbox-strategies: ^6.5.4
+  workbox-streams: ^6.5.4
   y-webrtc: ^10.2.3
   yjs: ^13.5.41
 
@@ -129,6 +141,18 @@ dependencies:
   styled-components: 5.3.6_biqbaboplfbrettd7655fr4n2y
   typescript: 4.8.4
   web-vitals: 2.1.4
+  workbox-background-sync: 6.5.4
+  workbox-broadcast-update: 6.5.4
+  workbox-cacheable-response: 6.5.4
+  workbox-core: 6.5.4
+  workbox-expiration: 6.5.4
+  workbox-google-analytics: 6.5.4
+  workbox-navigation-preload: 6.5.4
+  workbox-precaching: 6.5.4
+  workbox-range-requests: 6.5.4
+  workbox-routing: 6.5.4
+  workbox-strategies: 6.5.4
+  workbox-streams: 6.5.4
   y-webrtc: 10.2.3
   yjs: 13.5.42
 
@@ -1807,7 +1831,7 @@ packages:
     resolution: {integrity: sha512-mA9vbWzTwDnRlCMXsq+FgtARO/rQe1lNaVIsrHvpqaTDdoAn3EvwieSuwZyfi7dCAqTzIeBfkOGyEkeIeN45Gw==, tarball: download/@gkju/vlo-accounts-client-axios-ts/2.0.2/e0446c2da17768d43f33e300c63dc55fba73659a}
     dependencies:
       axios: 0.27.2
-      typescript: 5.0.0-dev.20221103
+      typescript: 5.0.0-dev.20221108
     transitivePeerDependencies:
       - debug
     dev: false
@@ -1816,7 +1840,7 @@ packages:
     resolution: {integrity: sha512-EWf4wMgLzAq5Z8pDPbLJqbiSWt6WcCakR1LQ7aY2+kesrJHWzEPfAEzrpG6HZOJMPKUE8aVUvnlgch9qb6MAgA==, tarball: download/@gkju/vlo-boards-client-axios-ts/1.10.0/6f469932806cd4f70018b9c57380606569dae95c}
     dependencies:
       axios: 0.27.2
-      typescript: 5.0.0-dev.20221103
+      typescript: 5.0.0-dev.20221108
     transitivePeerDependencies:
       - debug
     dev: false
@@ -1834,8 +1858,8 @@ packages:
       react-use: ^17.4.0
       typescript: ^4.7.4
     dependencies:
-      '@mui/icons-material': 5.10.9_rt3tosvnvwn7h5ygexek7l2aqi
-      '@mui/material': 5.10.12_qyfaqyy4fqtwm7rkczxwafvihm
+      '@mui/icons-material': 5.10.9_plf5nhzl5tc5ine6x6ffvvqqse
+      '@mui/material': 5.10.13_qyfaqyy4fqtwm7rkczxwafvihm
       '@mui/styled-engine': /@mui/styled-engine-sc/5.10.6_eayongmbiubxhlvsbyl6yact2u
       '@types/react': 18.0.21
       '@types/react-dom': 18.0.6
@@ -2483,8 +2507,8 @@ packages:
       react-is: 18.2.0
     dev: false
 
-  /@mui/base/5.0.0-alpha.104_rj7ozvcq3uehdlnj3cbwzbi5ce:
-    resolution: {integrity: sha512-tQPxZTzfYMwxYfKhEwufbTfdLpNjFdW7bXq6dK0j8651AAyZL4M8wynWUQ98hH1362R26mZFhVxHB2UD9t7VuA==}
+  /@mui/base/5.0.0-alpha.105_rj7ozvcq3uehdlnj3cbwzbi5ce:
+    resolution: {integrity: sha512-4IPBcJQIgVVXQvN6DQMoCHed52GBtwSqYs0jD0dDcMR3o76AodQtpEeWFz3p7mJoc6f/IHBl9U6jEfL1r/kM4g==}
     engines: {node: '>=12.0.0'}
     peerDependencies:
       '@types/react': ^17.0.0 || ^18.0.0
@@ -2511,11 +2535,11 @@ packages:
     resolution: {integrity: sha512-aDuE2PNEh+hAndxEWlZgq7uiFPZKJtnkPDX7v6kSCrMXA32ZaQ6rZi5olmC7DUHt/BaOSxb7N/im/ss0XBkDhA==}
     dev: false
 
-  /@mui/core-downloads-tracker/5.10.12:
-    resolution: {integrity: sha512-cR8lOS606G++iVHR8I6ySgMAEiPoA3DxO/nLeqiv7w7d1707kvKoV4/7SWjh4ui+kHb052xlf/G196q2EKx31w==}
+  /@mui/core-downloads-tracker/5.10.13:
+    resolution: {integrity: sha512-zWkWPV/SaNdsIdxAWiuVGZ+Ue3BkfSIlU/BFIrJmuUcwiIa7gQsbI/DOpj1KzLvqZhdEe2wC1aG4nCHfzgc1Hg==}
     dev: false
 
-  /@mui/icons-material/5.10.9_rt3tosvnvwn7h5ygexek7l2aqi:
+  /@mui/icons-material/5.10.9_plf5nhzl5tc5ine6x6ffvvqqse:
     resolution: {integrity: sha512-sqClXdEM39WKQJOQ0ZCPTptaZgqwibhj2EFV9N0v7BU1PO8y4OcX/a2wIQHn4fNuDjIZktJIBrmU23h7aqlGgg==}
     engines: {node: '>=12.0.0'}
     peerDependencies:
@@ -2527,7 +2551,7 @@ packages:
         optional: true
     dependencies:
       '@babel/runtime': 7.19.4
-      '@mui/material': 5.10.12_qyfaqyy4fqtwm7rkczxwafvihm
+      '@mui/material': 5.10.13_qyfaqyy4fqtwm7rkczxwafvihm
       '@types/react': 18.0.21
       react: 18.2.0
     dev: false
@@ -2586,8 +2610,8 @@ packages:
       - styled-components
     dev: false
 
-  /@mui/material/5.10.12_qyfaqyy4fqtwm7rkczxwafvihm:
-    resolution: {integrity: sha512-rG9ZTkG9qUwujyAY1I+uQAa9pkGdsWY3KN+wvS/6H6ZbYIA06QRwmig6ySC6LbeB3WL/I/1ngwJqWX7nfINSbA==}
+  /@mui/material/5.10.13_qyfaqyy4fqtwm7rkczxwafvihm:
+    resolution: {integrity: sha512-TkkT1rNc0/hhL4/+zv4gYcA6egNWBH/1Tz+azoTnQIUdZ32fgwFI2pFX2KVJNTt30xnLznxDWtTv7ilmJQ52xw==}
     engines: {node: '>=12.0.0'}
     peerDependencies:
       '@emotion/react': ^11.5.0
@@ -2604,9 +2628,9 @@ packages:
         optional: true
     dependencies:
       '@babel/runtime': 7.19.4
-      '@mui/base': 5.0.0-alpha.104_rj7ozvcq3uehdlnj3cbwzbi5ce
-      '@mui/core-downloads-tracker': 5.10.12
-      '@mui/system': 5.10.12_a3imcps5c7zreh7lw3vovq7rla
+      '@mui/base': 5.0.0-alpha.105_rj7ozvcq3uehdlnj3cbwzbi5ce
+      '@mui/core-downloads-tracker': 5.10.13
+      '@mui/system': 5.10.13_a3imcps5c7zreh7lw3vovq7rla
       '@mui/types': 7.2.0_@types+react@18.0.21
       '@mui/utils': 5.10.9_react@18.2.0
       '@types/react': 18.0.21
@@ -2687,8 +2711,8 @@ packages:
       - styled-components
     dev: false
 
-  /@mui/system/5.10.12_a3imcps5c7zreh7lw3vovq7rla:
-    resolution: {integrity: sha512-9DcN3hF2KTTTpZ0K5Tn20B+Tz7tIqDmJLk1M6P0CYoAGUN/xrcF/6dn1zZ829rxE5tmauoDUekTfomrvPsvlSQ==}
+  /@mui/system/5.10.13_a3imcps5c7zreh7lw3vovq7rla:
+    resolution: {integrity: sha512-Xzx26Asu5fVlm0ucm+gnJmeX4Y1isrpVDvqxX4yJaOT7Fzmd8Lfq9ih3QMfZajns5LMtUiOuCQlVFRtUG5IY7A==}
     engines: {node: '>=12.0.0'}
     peerDependencies:
       '@emotion/react': ^11.5.0
@@ -10959,8 +10983,8 @@ packages:
     hasBin: true
     dev: false
 
-  /typescript/5.0.0-dev.20221103:
-    resolution: {integrity: sha512-hfqcsmiJ+5ktli1OAkwu4PyDDJ3kWW3tiUofd2t1uxwmni3ZT3Mrv1m2dZFg9VNDKqHrkt49izB3tAtD2bsyGw==}
+  /typescript/5.0.0-dev.20221108:
+    resolution: {integrity: sha512-np7hLTLHztenzHetS6xnYYo/P+VcjgUYWkblyl8jCeKgrC7fHJt1QlcjL83uC7YQiHLz5o9zgMZKtZbQBHPzkg==}
     engines: {node: '>=4.2.0'}
     hasBin: true
     dev: false

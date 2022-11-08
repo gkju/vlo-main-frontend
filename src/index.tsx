@@ -20,6 +20,7 @@ import {BrowserRouter, Routes, Route} from "react-router-dom";
 import {LocalizationProvider} from "@mui/x-date-pickers";
 import {AdapterMoment} from "@mui/x-date-pickers/AdapterMoment";
 import "moment/locale/pl";
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
 const theme = createTheme({
     palette: {
@@ -70,6 +71,7 @@ root.render(
     </React.StrictMode>
 );
 
+serviceWorkerRegistration.register();
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals

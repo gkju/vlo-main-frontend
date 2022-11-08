@@ -59,7 +59,7 @@ export const SmallCardFooter = styled.div`
 `
 
 export const SmallCardTitle = styled.div`
-    font-family: Lato, serif;
+    font-family: Lato, sans-serif;
     padding: 0 35px 0 35px;
     margin-top: 5px;
     font-size: 30px;

@@ -11,7 +11,7 @@ export const Intro = styled.div<Props>`
   border-radius: 10px;
   width: 100%;
   height: 100%;
-  font-family: Lato, sans-serif;
+  font-family: 'Lato', sans-serif;
   text-align: center;
   display: flex;
   align-items: center;

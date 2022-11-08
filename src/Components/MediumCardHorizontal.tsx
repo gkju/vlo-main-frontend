@@ -32,7 +32,7 @@ export const MediumCardHorizontal: FunctionComponent<SmallCardProps & {className
 }
 
 export const Title = styled.div`
-  font-family: Lato, serif;
+  font-family: Lato, sans-serif;
   font-size: 60px;
   font-weight: 500;
   text-align: center;
