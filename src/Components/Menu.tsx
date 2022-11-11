@@ -13,6 +13,8 @@ import {
 } from "react-icons/ai";
 import { useProfileInfo } from "./Queries";
 import { ProfilePicture } from "./ProfilePicture";
+import {useSelector} from "react-redux";
+import {selectLoggedIn} from "../Redux/Slices/Auth";
 
 interface Item {
   route: string;
@@ -82,6 +84,7 @@ export const Menu: FunctionComponent = () => {
   const [offset, setOffset] = useState(0);
   const [highlighterIndex, setIndex] = useState(0);
   const { data, isLoading } = useProfileInfo();
+  let loggedIn: boolean = useSelector(selectLoggedIn);
 
   const horizontal = width < 800;
 
@@ -141,18 +144,25 @@ export const Menu: FunctionComponent = () => {
 
       {!horizontal && (
         <MenuFooter className="grid items-center justify-items-center grid-rows-[1fr_1fr] grid-cols-[7fr_10fr_1fr] text-white">
-          <ProfilePicture
-            className="p-2 row-span-full w-full"
-            Id={data?.data.id ?? ""}
-          />
-          <div className="col-start-2 text-center self-end">
-            <p className="text-[25px] font-bold">{data?.data.userName}</p>
-          </div>
-          <div className="col-start-2 self-start row-start-2 text-center">
-            <p className="text-[7px] text-[#6F6F6F] font-bold">
-              {data?.data.email}
-            </p>
-          </div>
+          {!loggedIn ? <>
+            <motion.button onPointerUp={() => navigate("/Login")} initial={{scale: 1}} whileHover={{scale: 1.1}} className="text-white col-start-5 col-span-2 rounded-xl p-2 -mt-2 w-full">
+              Zaloguj się
+            </motion.button>
+          </> : <>
+            <ProfilePicture
+                className="p-2 row-span-full w-full"
+                Id={data?.data.id ?? ""}
+            />
+            <div className="col-start-2 text-center self-end">
+              <p className="text-[25px] font-bold">{data?.data.userName}</p>
+            </div>
+            <div className="col-start-2 self-start row-start-2 text-center">
+              <p className="text-[7px] text-[#6F6F6F] font-bold">
+                {data?.data.email}
+              </p>
+            </div>
+          </>}
+
         </MenuFooter>
       )}
     </MenuBase>

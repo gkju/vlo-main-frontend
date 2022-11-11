@@ -25,9 +25,10 @@ import { useCallback, useState } from "react";
 import * as React from "react";
 import Button from "../ui/Button";
 import TextInput from "../ui/TextInput";
-import { INSERT_TABLE_COMMAND as INSERT_NEW_TABLE_COMMAND } from "./TablePlugin";
 import {INSERT_EQUATION_COMMAND} from "./EquationsPlugin";
 import KatexEquationAlterer from "../ui/KatexEquationAlterer";
+import {INSERT_NEW_TABLE_COMMAND} from "./TablePlugin";
+import {INSERT_TABLE_COMMAND} from "@lexical/table";
 
 export const blockTypeToBlockName = {
   bullet: "Bulleted List",
@@ -329,7 +330,7 @@ export function InsertTableDialog({
   const [columns, setColumns] = useState("5");
 
   const onClick = () => {
-    activeEditor.dispatchCommand(INSERT_NEW_TABLE_COMMAND, { columns, rows });
+    activeEditor.dispatchCommand(INSERT_TABLE_COMMAND, { columns, rows });
     onClose();
   };
 

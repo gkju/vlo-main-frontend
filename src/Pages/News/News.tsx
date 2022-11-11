@@ -10,9 +10,12 @@ import {useEffect, useState} from "react";
 import {AccountsDataModelsDataModelsArticle} from "@gkju/vlo-boards-client-axios-ts";
 import _ from "lodash";
 import {VLoader} from "@gkju/vlo-ui";
+import {useSelector} from "react-redux";
+import {selectLoggedIn} from "../../Redux/Slices/Auth";
 
 export const News = () => {
     const navigate = useNavigate();
+    let loggedIn: boolean = useSelector(selectLoggedIn);
     const [search, setSearch] = useState("");
     const [debouncedSearch, _setDebouncedSearch] = useState("");
     const setDebouncedSearch = _.debounce((str: string) => {
@@ -33,9 +36,16 @@ export const News = () => {
         <Toolbar className="absolute z-10 w-full">
             <div className="px-5 md:px-20 pt-10 grid grid-cols-5">
                 <input type="text" value={search} onChange={e => {setSearch(e.target.value); setDebouncedSearch(e.target.value)}} placeholder="Szukaj..." className="bg-transparent outline-none" />
-                <motion.button onPointerUp={() => navigate("/CreateArticle")} initial={{scale: 1}} whileHover={{scale: 1.1}} className="text-white bg-[#6D5DD3] col-start-5 col-span-2 rounded-xl p-2 -mt-2 w-full">
-                    Utwórz
-                </motion.button>
+                {loggedIn ? <>
+                    <motion.button onPointerUp={() => navigate("/CreateArticle")} initial={{scale: 1}} whileHover={{scale: 1.1}} className="text-white bg-[#6D5DD3] col-start-5 col-span-2 rounded-xl p-2 -mt-2 w-full">
+                        Utwórz
+                    </motion.button>
+                    </> : <>
+                    <motion.button onPointerUp={() => navigate("/Login")} initial={{scale: 1}} whileHover={{scale: 1.1}} className="text-white bg-[#6D5DD3] col-start-5 col-span-2 rounded-xl p-2 -mt-2 w-full">
+                        Zaloguj się
+                    </motion.button>
+                </>}
+
             </div>
         </Toolbar>
         <AnimatePresence mode="wait">

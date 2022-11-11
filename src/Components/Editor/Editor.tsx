@@ -15,9 +15,11 @@ import { LinkPlugin } from "@lexical/react/LexicalLinkPlugin";
 import { ListPlugin } from "@lexical/react/LexicalListPlugin";
 import { MarkdownShortcutPlugin } from "@lexical/react/LexicalMarkdownShortcutPlugin";
 import { TRANSFORMERS } from "@lexical/markdown";
+import {TablePlugin} from '@lexical/react/LexicalTablePlugin';
 import "./index.css";
+import "./codestyles.css";
 import "./Theme/CodeHighlighting.css";
-
+import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
 import AutoLinkPlugin from "./plugins/AutoLinkPlugin";
 import ListMaxIndentLevelPlugin from "./plugins/ListMaxIndentLevelPlugin";
 import CodeHighlightPlugin from "./plugins/CodeHighlightPlugin";
@@ -43,7 +45,6 @@ import {
   TablePlugin as NewTablePlugin,
 } from "./plugins/TablePlugin";
 import CodeActionMenuPlugin from "./plugins/CodeActionMenuPlugin";
-import { TablePlugin } from "@lexical/react/LexicalTablePlugin";
 import { TableNode as NewTableNode } from "./nodes/TableNode";
 import { TableCellNode, TableRowNode, TableNode } from "@lexical/table";
 import DraggableBlockPlugin from "./plugins/DraggableBlockPlugin";
@@ -67,6 +68,9 @@ const Nodes = [
   QuoteNode,
   CodeNode,
   CodeHighlightNode,
+  TableNode,
+  TableCellNode,
+  TableRowNode,
   NewTableNode,
   AutoLinkNode,
   LinkNode,
@@ -169,6 +173,7 @@ export default function Editor(props: EditorProps) {
                     </div>
                   }
                   placeholder={<Placeholder />}
+                  ErrorBoundary={LexicalErrorBoundary}
                 />
                 <AutoFocusPlugin />
                 <OnChangePlugin onChange={props?.onChange ?? (() => 1)} />
@@ -184,6 +189,7 @@ export default function Editor(props: EditorProps) {
                 <FigmaPlugin />
                 <AutoEmbedPlugin />
                 <AddFilePlugin />
+                <TablePlugin />
                 <NewTablePlugin cellEditorConfig={cellEditorConfig}>
                   <AutoFocusPlugin />
                   <RichTextPlugin
@@ -191,6 +197,7 @@ export default function Editor(props: EditorProps) {
                       <ContentEditable className="TableNode__contentEditable" />
                     }
                     placeholder={""}
+                    ErrorBoundary={LexicalErrorBoundary}
                   />
                   <HistoryPlugin />
                   <LinkPlugin />

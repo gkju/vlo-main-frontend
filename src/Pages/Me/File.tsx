@@ -118,7 +118,7 @@ export const File: FunctionComponent<FileProps> = (props) => {
                          onContextMenu={handleContextMenu}
                     >
                         <Card {...props} style={file.userManageable === false ? {opacity: 0.3} : {}}>
-                            <div className="text-7xl relative">
+                            <div className="text-7xl relative flex justify-center">
                                 <FileIcon file={file} url={data?.data ?? ''} />
                             </div>
                             <div className="max-w-40">

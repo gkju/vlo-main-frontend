@@ -26,6 +26,8 @@ import {Breadcrumbs, Menu, MenuItem, Typography, Link} from "@mui/material";
 import {minimalModal, queueMinimalistModal} from "../../Redux/Slices/MinimalModal";
 import Store from "../../Redux/Store/Store";
 import authService from "../../Auth/AuthService";
+import {useSelector} from "react-redux";
+import {selectLoggedIn} from "../../Redux/Slices/Auth";
 
 export type file_t = AccountsDataModelsDataModelsFile;
 export type folder_t = AccountsDataModelsDataModelsFolder;
@@ -102,6 +104,8 @@ export const Me: FunctionComponent = () => {
   const refy = useRef<HTMLDivElement>(null);
   const [style,api] = useSpring(() => ({x: 0, y: 0}));
   const { id } = useParams<{ id: string }>();
+
+  let loggedIn: boolean = useSelector(selectLoggedIn);
 
   const isPressedCmd = useKeyPress("Meta");
   const isPressedCtrl = useKeyPress("Control");
@@ -258,6 +262,10 @@ export const Me: FunctionComponent = () => {
   const client = useQueryClient();
 
   const navigate = useNavigate();
+
+  if(!loggedIn) {
+    navigate('/login');
+  }
 
   if(isLoading) {
     return <VLoader />

@@ -1,0 +1,11 @@
+.editor-code:before {
+
+}
+
+.editor-code {
+    position: relative;
+    padding: 12px;
+    font-family: "JetBrains Mono", "Fira Code", Inconsolata, Consolas, monospace;
+    background: rgb(40, 44, 52);
+    box-shadow: 0px 0px 29px 3px #171720;
+}

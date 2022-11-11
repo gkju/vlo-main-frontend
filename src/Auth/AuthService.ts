@@ -15,6 +15,7 @@ class AuthService {
             this.userManager.events.addAccessTokenExpiring(this.onAccessTokenExpiring);
             this.userManager.events.addUserUnloaded(this.onUserUnloaded);
             this.userManager.events.addUserSignedOut(this.onUserSignedOut);
+            this.userManager.events.addUserSignedIn(() => {this.setUser()});
         }
     }
 
@@ -27,6 +28,12 @@ class AuthService {
 
         await this.userManager.signinSilent();
         await this.setUser();
+    }
+
+    async resetUser() {
+        await this.userManager?.removeUser();
+        await this.userManager?.revokeTokens();
+        await this.userManager?.clearStaleState();
     }
 
     async signInPopUp() {

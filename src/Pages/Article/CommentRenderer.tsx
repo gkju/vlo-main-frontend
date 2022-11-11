@@ -15,7 +15,7 @@ import {Button} from "@mui/material";
 import {isDevelopment} from "../../Config";
 import authService from "../../Auth/AuthService";
 import {useSelector, useStore} from "react-redux";
-import {selectProfile} from "../../Redux/Slices/Auth";
+import {selectLoggedIn, selectProfile} from "../../Redux/Slices/Auth";
 import {modal, queueModal} from "../../Redux/Slices/Modal";
 import Store from "../../Redux/Store/Store";
 
@@ -26,7 +26,7 @@ interface CommentProps {
 }
 
 export const CommentRenderer: FunctionComponent<PropsWithChildren<CommentProps>> = ({comment, articleId, comments}) => {
-
+    let loggedIn: boolean = useSelector(selectLoggedIn);
     const pic = useProfilePicture(comment.author?.id ?? "");
 
     const addReaction = useAddReactionToComment(articleId, comment.id ?? "");
@@ -103,9 +103,11 @@ export const CommentRenderer: FunctionComponent<PropsWithChildren<CommentProps>>
             </div>
             {comment.content}
             <div className="text-[rgba(255,255,255,0.3)] text-xs flex justify-center items-center center-align">
-                <span className="cursor-pointer" onClick={() => setShow(!show)}>
-                    Odpowiedz
-                </span>
+                {loggedIn && <>
+                    <span className="cursor-pointer" onClick={() => setShow(!show)}>
+                        Odpowiedz
+                    </span>
+                </>}
                 <ReactionWrapper title="Like" onClick={() => addReaction(ReactionType.Like)}>
                     <AiFillLike />
                     {getReactionCount(ReactionType.Like)}

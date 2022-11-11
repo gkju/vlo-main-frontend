@@ -91,7 +91,7 @@ import { queueModal } from "../../../Redux/Slices/Modal";
 import { AiOutlineFileAdd } from "react-icons/ai";
 import { Box, Modal, Paper } from "@mui/material";
 import { AnimatePresence } from "framer-motion";
-import { INSERT_TABLE_COMMAND as INSERT_NEW_TABLE_COMMAND } from "./TablePlugin";
+import { INSERT_NEW_TABLE_COMMAND } from "./TablePlugin";
 import {file_api} from "../../../Pages/Me/Queries";
 
 const style = {

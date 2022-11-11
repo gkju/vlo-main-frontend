@@ -41,7 +41,7 @@ registerRoute(
       return false;
     }
 
-    const routes = ["/api", "/connect", "/authorize", "/par", "/device", "/token", "/introspect", "/revoke", "/logout", "/keys", "/userinfo", "/."];
+    const routes = ["/api", "/connect", "/authorize", "/par", "/device", "/token", "/introspect", "/revoke", "/logout", "/keys", "/userinfo", "/.", "/sign", "/log"];
 
     for(let route of routes) {
         if(url.pathname.startsWith(route)) {

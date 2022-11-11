@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import { useArticleDetails, useArticlePicture } from "../CreateArticle/Queries";
 import {RippleAble, VLoader} from "@gkju/vlo-ui";
 import styled from "styled-components";
@@ -14,6 +14,8 @@ import kerfus from "./kerfus.webp";
 import {AccountsDataModelsDataModelsArticle} from "@gkju/vlo-boards-client-axios-ts";
 import {Button} from "@mui/material";
 import {CommentRenderer} from "./CommentRenderer";
+import {useSelector} from "react-redux";
+import {selectLoggedIn} from "../../Redux/Slices/Auth";
 
 var formatter = new Intl.DateTimeFormat("pl", {
   day: "numeric",
@@ -79,6 +81,9 @@ export const Article = () => {
       setTouched(false);
     }
   }
+  let loggedIn: boolean = useSelector(selectLoggedIn);
+
+  const navigate = useNavigate();
 
   if (!article) {
     return <VLoader />;
@@ -92,7 +97,7 @@ export const Article = () => {
         <Title>{article.title}</Title>
       </Background>
       <div className="flex flex-col justify-items-center items-center justify-center">
-        <div className="max-w-[800px] w-full grid grid-cols-[1fr_10fr_1fr]">
+        <div className="max-w-[800px] w-full grid grid-cols-[1fr_30fr_1fr] md:grid-cols-[1fr_10fr_1fr]">
           <div className="col-start-2 row-start-1 py-2 px-2">
             <Intro className="text-xs md:text-lg">
               {article?.author?.userName},{" "}
@@ -150,13 +155,20 @@ export const Article = () => {
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
             <path fill="#21212B" fill-opacity="1" d="M0,160L48,181.3C96,203,192,245,288,245.3C384,245,480,203,576,154.7C672,107,768,53,864,74.7C960,96,1056,192,1152,229.3C1248,267,1344,245,1392,234.7L1440,224L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
           </svg>
-          <div className="px-10 grid mx-auto pb-10 w-full max-w-[700px] relative">
-            <NeumorphTextArea className="" value={commentText} onChange={e => {setCommentText(e.target.value); setTouched(true); e.target.style.setProperty("--lines", String(e.target.value.split(/\r\n|\r|\n/).length))}} placeholder="Dodaj komentarz" hasValue={commentText.length > 0} />
-            {touched && <div className="mt-5 mx-5">
-              <Button className="" variant="outlined" onClick={() => {setTouched(false); setCommentText("");}}>Anuluj</Button>
-              <Button className="float-right" variant="contained" onClick={addCommentHandler}>Dodaj</Button>
-            </div>}
-          </div>
+          {loggedIn ? <>
+            <div className="px-10 grid mx-auto pb-10 w-full max-w-[700px] relative">
+              <NeumorphTextArea className="" value={commentText} onChange={e => {setCommentText(e.target.value); setTouched(true); e.target.style.setProperty("--lines", String(e.target.value.split(/\r\n|\r|\n/).length))}} placeholder="Dodaj komentarz" hasValue={commentText.length > 0} />
+              {touched && <div className="mt-5 mx-5">
+                <Button className="" variant="outlined" onClick={() => {setTouched(false); setCommentText("");}}>Anuluj</Button>
+                <Button className="float-right" variant="contained" onClick={addCommentHandler}>Dodaj</Button>
+              </div>}
+            </div>
+          </> : <div className="w-full p-10 text-xl text-center">
+            <span className="cursor-pointer" onClick={() => navigate("/login")}>
+                Zaloguj się aby dodawać komentarze i reakcje
+            </span>
+          </div>}
+
           <div className="px-10">
             {article.comments?.filter(c => c.inReplyTo == undefined)?.map((comment) => (
                 <CommentRenderer articleId={article.articleId ?? ""} comments={article.comments ?? []} comment={comment} key={comment.id} />

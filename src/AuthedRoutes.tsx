@@ -21,7 +21,7 @@ import { Me } from "./Pages/Me/Me";
 import {LogoutRequest} from "./Auth/LogoutRequest";
 import {Contact} from "./Pages/Contact/Contact";
 
-let HideMenuRoutes = ["/CreateArticle", "/articles/"];
+export const HideMenuRoutes = ["/CreateArticle", "/articles/", "/news/"];
 
 export const AuthedRoutes: FunctionComponent = (props) => {
   const { width } = useWindowSize();
@@ -71,7 +71,7 @@ export const AuthedRoutes: FunctionComponent = (props) => {
   );
 };
 
-const Background = styled(motion.div)`
+export const Background = styled(motion.div)`
   background: rgba(33, 33, 43, 1);
   min-height: 100vh;
   height: 100%;
